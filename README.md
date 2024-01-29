@@ -26,7 +26,7 @@ Create a `sketch.yaml` with the details from above. For example:
 
 ```pwsh
 arduino-cli board attach -p COM4 -b arduino:megaavr
-``
+```
 
 > [!NOTE]
 > For `make` users, replace the port variable in the `Makefile` with your port.
