@@ -15,7 +15,7 @@ enum class LogLevel {
 
 /// Logs information to the terminal with formatting
 class Logger {
-  LogLevel log_level_ = LogLevel::Warning;
+  LogLevel log_level_ = LogLevel::Info;
   Stream *stream_;
   Ansi ansi_;
 
