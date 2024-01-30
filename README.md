@@ -18,6 +18,12 @@ Simple Arduino Uno Wifi Rev 2 scanner with formatted printing.
 
 ## Usage (Arduino CLI)
 
+Clone this repository as `scanner`:
+
+```pwsh
+git clone https://github.com/cgvillarroel/arduino-wifi-scanner scanner
+```
+
 Install the PrettyLogger library (see `/plogger/README.md`).
 
 Plug your board then identify your port and fully qualified board name (FQBN):
