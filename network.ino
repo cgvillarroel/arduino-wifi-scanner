@@ -24,48 +24,56 @@ int listNetworks(void) {
       ;
   }
 
-  (void)logger.info(String(F("Number of available networks: ")) +
-                    String(ssid_count));
+  (void)logger.logHeader(LogLevel::Info);
+  (void)Serial.print(F("Number of available networks: "));
+  (void)Serial.println(ssid_count);
   (void)logger.info(F("=== AVAILABLE NETWORKS ==="));
 
   for (int i = 0; i < ssid_count; ++i) {
+    (void)logger.logHeader(LogLevel::Info);
     String ssid = WiFi.SSID(i);
-    String details = String(i) + F(": ") + ssid;
+    (void)Serial.print(i);
+    (void)Serial.print(F(": "));
+    (void)Serial.print(ssid);
 
     // ssid padding
     for (int j = ssid.length(); j < MAX_SSID_LENGTH; ++j) {
-      details += F(" ");
+      (void)Serial.print(F(" "));
     };
 
-    details += String(F("\tSignal: ")) + WiFi.RSSI(i) +
-               F(" dBm\t\tEncryption: ") + encryptionTypeToString(i);
-
-    (void)logger.info(details);
+    (void)Serial.print(F("\tSignal: "));
+    (void)Serial.print(WiFi.RSSI(i));
+    (void)Serial.print(F(" dBm\t\tEncryption: "));
+    printEncryptionType(WiFi.encryptionType(i));
   }
 
   return ssid_count;
 }
 
-String encryptionTypeToString(int netId) {
-  switch (WiFi.encryptionType(netId)) {
+void printEncryptionType(uint8_t type) {
+  switch (type) {
   case ENC_TYPE_WEP:
-    return F("WEP");
+    Serial.println(F("WEP"));
+		break;
 
   case ENC_TYPE_TKIP:
-    return F("WPA");
+    Serial.println(F("WPA"));
+		break;
 
   case ENC_TYPE_CCMP:
-    return F("WPA2");
+    Serial.println(F("WPA2"));
+		break;
 
   case ENC_TYPE_NONE:
-    return F("None");
+    Serial.println(F("None"));
+		break;
 
   case ENC_TYPE_AUTO:
-    return F("Auto");
+    Serial.println(F("Auto"));
+		break;
 
   case ENC_TYPE_UNKNOWN:
-
   default:
-    return F("Unknown");
+    Serial.println(F("Unknown"));
   }
 }

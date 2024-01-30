@@ -5,7 +5,7 @@ Logger::Logger(HardwareSerial *serial) : ansi_(serial) { stream_ = serial; }
 
 void Logger::setLogLevel(LogLevel level) { log_level_ = level; }
 
-int Logger::log(LogLevel level, const char *message, const char *caller) {
+int Logger::logHeader(LogLevel level, const char *caller) {
   if (level < log_level_) {
     return 0;
   }
@@ -42,6 +42,12 @@ int Logger::log(LogLevel level, const char *message, const char *caller) {
   printed += stream_->print(caller);
   printed += ansi_.Reset();
   printed += stream_->print(F("): "));
+  return printed;
+}
+
+int Logger::log(LogLevel level, const char *message, const char *caller) {
+  int printed = 0;
+  printed += logHeader(level, caller);
   printed += stream_->println(message);
   return printed;
 }

@@ -38,14 +38,19 @@ void setup(void) {
   }
 
   byte mac[6];
-  WiFi.macAddress(mac);
-  (void)logger.info(String(F("MAC: ")) + macAddressToString(mac));
+  (void)WiFi.macAddress(mac);
+  (void)logger.logHeader(LogLevel::Info);
+  (void)Serial.print(F("MAC: "));
+  (void)Serial.println(macAddressToString(mac));
 }
 
 void loop(void) {
   int ssid_count = listNetworks();
   for (int i = REFRESH_PERIOD; i > 0; --i) {
-    (void)logger.info(String(F("Refeshing in ")) + String(i) + F("s... "));
+    (void)logger.logHeader(LogLevel::Info);
+    (void)Serial.print(F("Refreshing in "));
+    (void)Serial.print(i);
+    (void)Serial.println(F("s... "));
     (void)ansi.previousLine(1);
     delay(1000);
   }

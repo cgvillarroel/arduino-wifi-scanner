@@ -24,6 +24,7 @@ public:
   void setLogLevel(LogLevel);
 
   int log(LogLevel, const char *, const char *caller = __builtin_FUNCTION());
+  int logHeader(LogLevel, const char *caller = __builtin_FUNCTION());
   int debug(const char *, const char *caller = __builtin_FUNCTION());
   int info(const char *, const char *caller = __builtin_FUNCTION());
   int warning(const char *, const char *caller = __builtin_FUNCTION());
