@@ -10,6 +10,10 @@ Simple Arduino Uno Wifi Rev 2 scanner with formatted printing.
 ## Requirements
 
 - [Arduino CLI](https://arduino.github.io/arduino-cli/latest/)
+- megaAVR core
+  - CLI users: `arduino-cli core update-index && arduino-cli core install arduino:megaavr`
+- [WiFiNINA](https://www.arduino.cc/reference/en/libraries/wifinina/)
+  - CLI users: `arduino-cli lib install WiFiNINA`
 - GNU Make (optional)
 
 ## Usage (Arduino CLI)
@@ -34,8 +38,7 @@ arduino-cli board attach -p COM4 -b arduino:megaavr
 Compile, flash, and monitor:
 
 ```pwsh
-arduino-cli compile
-arduino-cli upload
+arduino-cli compile && arduino-cli upload
 arduino-cli monitor -p COM4
 ```
 
