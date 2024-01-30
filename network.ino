@@ -2,11 +2,11 @@ String macAddressToString(byte *mac) {
   String addr;
   for (int i = 5; i >= 0; i--) {
     if (mac[i] < 16) {
-      addr += String(0);
+      addr += 0;
     }
     addr += String(mac[i], HEX);
     if (i > 0) {
-      addr += String(":");
+      addr += F(":");
     }
   }
 
@@ -30,15 +30,15 @@ int listNetworks(void) {
 
   for (int i = 0; i < ssid_count; ++i) {
     String ssid = WiFi.SSID(i);
-    String details = String(i) + String(F(": ")) + ssid;
+    String details = String(i) + F(": ") + ssid;
 
     // ssid padding
     for (int j = ssid.length(); j < MAX_SSID_LENGTH; ++j) {
-      details += String(" ");
+      details += F(" ");
     };
 
     details += String(F("\tSignal: ")) + WiFi.RSSI(i) +
-               String(F(" dBm\t\tEncryption: ")) + encryptionTypeToString(i);
+               F(" dBm\t\tEncryption: ") + encryptionTypeToString(i);
 
     (void)logger.info(details);
   }
@@ -49,23 +49,23 @@ int listNetworks(void) {
 String encryptionTypeToString(int netId) {
   switch (WiFi.encryptionType(netId)) {
   case ENC_TYPE_WEP:
-    return String(F("WEP"));
+    return F("WEP");
 
   case ENC_TYPE_TKIP:
-    return String(F("WPA"));
+    return F("WPA");
 
   case ENC_TYPE_CCMP:
-    return String(F("WPA2"));
+    return F("WPA2");
 
   case ENC_TYPE_NONE:
-    return String(F("None"));
+    return F("None");
 
   case ENC_TYPE_AUTO:
-    return String(F("Auto"));
+    return F("Auto");
 
   case ENC_TYPE_UNKNOWN:
 
   default:
-    return String(F("Unknown"));
+    return F("Unknown");
   }
 }

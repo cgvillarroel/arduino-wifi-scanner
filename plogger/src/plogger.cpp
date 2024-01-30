@@ -1,5 +1,5 @@
-#include "plogger.h"
 #include "ansi.h"
+#include "plogger.h"
 
 Logger::Logger(HardwareSerial *serial) : ansi_(serial) { stream_ = serial; }
 
@@ -11,7 +11,7 @@ int Logger::log(LogLevel level, const char *message, const char *caller) {
   }
 
   int printed = 0;
-  printed += stream_->print("[");
+  printed += stream_->print(F("["));
 
   switch (level) {
   case LogLevel::Debug:
@@ -37,51 +37,51 @@ int Logger::log(LogLevel level, const char *message, const char *caller) {
   }
 
   printed += ansi_.Reset();
-  printed += stream_->print("] (");
+  printed += stream_->print(F("] ("));
   printed += ansi_.CyanFg();
   printed += stream_->print(caller);
   printed += ansi_.Reset();
-  printed += stream_->print("): ");
+  printed += stream_->print(F("): "));
   printed += stream_->println(message);
   return printed;
 }
 
 int Logger::debug(const char *message, const char *caller) {
-  log(LogLevel::Debug, message, caller);
+  return log(LogLevel::Debug, message, caller);
 }
 
 int Logger::info(const char *message, const char *caller) {
-  log(LogLevel::Info, message, caller);
+  return log(LogLevel::Info, message, caller);
 }
 
 int Logger::warning(const char *message, const char *caller) {
-  log(LogLevel::Warning, message, caller);
+  return log(LogLevel::Warning, message, caller);
 }
 
 int Logger::error(const char *message, const char *caller) {
-  log(LogLevel::Error, message, caller);
+  return log(LogLevel::Error, message, caller);
 }
 
 int Logger::fatal(const char *message, const char *caller) {
-  log(LogLevel::Fatal, message, caller);
+  return log(LogLevel::Fatal, message, caller);
 }
 
 int Logger::debug(const String &message, const char *caller) {
-  log(LogLevel::Debug, message.c_str(), caller);
+  return log(LogLevel::Debug, message.c_str(), caller);
 }
 
 int Logger::info(const String &message, const char *caller) {
-  log(LogLevel::Info, message.c_str(), caller);
+  return log(LogLevel::Info, message.c_str(), caller);
 }
 
 int Logger::warning(const String &message, const char *caller) {
-  log(LogLevel::Warning, message.c_str(), caller);
+  return log(LogLevel::Warning, message.c_str(), caller);
 }
 
 int Logger::error(const String &message, const char *caller) {
-  log(LogLevel::Error, message.c_str(), caller);
+  return log(LogLevel::Error, message.c_str(), caller);
 }
 
 int Logger::fatal(const String &message, const char *caller) {
-  log(LogLevel::Fatal, message.c_str(), caller);
+  return log(LogLevel::Fatal, message.c_str(), caller);
 }
