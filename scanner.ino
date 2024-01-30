@@ -4,10 +4,9 @@
   Scans for WiFi networks and formats the output to look pretty.
 */
 
-#include <plogger.h>
 #include <SPI.h>
 #include <WiFiNINA.h>
-
+#include <plogger.h>
 
 #define REFRESH_PERIOD 10
 
@@ -46,10 +45,10 @@ void setup(void) {
 void loop(void) {
   int ssid_count = listNetworks();
   for (int i = REFRESH_PERIOD; i > 0; --i) {
-    logger.info(String(F("Refeshing in ")) + String(i) + String(F("s... ")));
-    ansi.previousLine(1);
+    (void)logger.info(String(F("Refeshing in ")) + String(i) +
+                      String(F("s... ")));
+    (void)ansi.previousLine(1);
     delay(1000);
   }
-  ansi.previousLine(ssid_count + 3);
-
+  (void)ansi.previousLine(ssid_count + 3);
 }

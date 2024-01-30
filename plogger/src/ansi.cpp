@@ -52,6 +52,6 @@ int Ansi::eraseDisplay(EraseMode mode) {
   int printed = 0;
   printed += stream_->print(F("\x1b["));
   printed += stream_->print((int)mode);
-  printed += stream_->print(F("F"));
+  printed += stream_->print(F("J"));
   return printed;
 }

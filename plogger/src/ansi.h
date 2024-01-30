@@ -3,11 +3,7 @@
 
 #include <Arduino.h>
 
-enum class EraseMode {
-  After,
-  Before,
-  All
-};
+enum class EraseMode { After, Before, All };
 
 /// ANSI helper class
 /// Contains definitions and functions for terminal interactions
